@@ -45,7 +45,7 @@ export const AddStudent = () => {
             name="first_name"
             className="first_name"
             placeholder="enter first name"
-            value={formFill.first_name}
+            value={fillForm.first_name}
           />
         </div>
         <div>
@@ -56,7 +56,7 @@ export const AddStudent = () => {
             name="last_name"
             className="last_name"
             placeholder="enter last name"
-            value={formFill.last_name}
+            value={fillForm.last_name}
           />
         </div>
         <div>
@@ -67,7 +67,7 @@ export const AddStudent = () => {
             name="email"
             className="email"
             placeholder="enter email"
-            value={formFill.email}
+            value={fillForm.email}
           />
         </div>
   
@@ -97,7 +97,7 @@ export const AddStudent = () => {
             name="age"
             className="age"
             placeholder="enter age"
-            value={formFill.age}
+            value={fillForm.age}
           />
         </div>
         <div>
@@ -107,7 +107,7 @@ export const AddStudent = () => {
             name="tenth_score"
             className="tenth_score"
             placeholder="enter 10th score"
-            value={formFill.tenth_score}
+            value={fillForm.tenth_score}
           />{" "}
         </div>
         <div>
@@ -117,7 +117,7 @@ export const AddStudent = () => {
             name="twelth_score"
             className="twelth_score"
             placeholder="enter 12th score"
-            value={formFill.twelth_score}
+            value={fillForm.twelth_score}
           />{" "}
         </div>
         <div>

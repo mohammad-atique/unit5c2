@@ -3,11 +3,23 @@ import { useEffect, useState } from "react";
 
 export const ShowStudents = () => {
     const [data, setData] = useState();
-    const [table, setTable] = useState([])
+    const [table, setTable] = useState([]);
+    const [filter, setFilter] = useState({
+        filt: "",
+        ad: "asc"
+    })
     const handleChange = (e) => {
-
+        const name= e.target.name;
+        const value = e.target.value;
+        setFilter({...filter, [name]:value})
     }
-
+const Sort = ()=>{
+    if(filter.ad==="asc"){
+        setData([...table.sort((a,b)=> a[filter.filt]-b[filter.filt])])
+    }else {
+        setData([...table.sort((a,b)=> b[filter.filt]-a[filter.filt])])
+    }
+}
 
     useEffect(() => {
         fetch("http://localhost:8080/students").then((res) => res.json()).then((dbData) => {
@@ -27,6 +39,9 @@ export const ShowStudents = () => {
                     <select
                         // select dropdown needs both value and onChange
                         className="sortby"
+                        name="filt"
+                        value={""}
+                        onChange={handleChange}
                     >
                         <option value="first_name">First Name</option>
                         <option value="gender">Gender</option>
@@ -41,12 +56,14 @@ export const ShowStudents = () => {
                         // select dropdown needs both value and onChange
                         className="sortorder"
                         onChange={handleChange}
+                        value={""}
+                        name="ad"
                     >
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
                     </select>
                 </div>
-                <button className="sort">sort</button>
+                <button className="sort" onClick={Sort}>sort</button>
             </div>
             <table className="table">
                 <thead>

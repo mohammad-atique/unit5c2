@@ -1,13 +1,51 @@
+
+import { useEffect, useState } from "react";
 export const AddStudent = () => {
+  const [fillForm, setForm] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    gender: "",
+    age: "",
+    tenth_score: "",
+    twelth_score: "",
+    preferred_branch: ""
+  })
+  const formUpdate =(e)=>{
+    const name = e.target.value;
+    const values = e.target.value;
+    setForm({...fillForm, [name]:values})
+  }
+  const formSub = (e)=>{
+    e.preventDefault();
+    fetch("http://localhost:8080/students",{
+      method:"POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(fillForm)
+    })
+    setForm({
+      first_name: "",
+    last_name: "",
+    email: "",
+    gender: "",
+    age: "",
+    tenth_score: "",
+    twelth_score: "",
+    preferred_branch: ""
+    })
+  }
     return (
-      <form className="addstudent">
+      <form className="addstudent" onSubmit={formSub}>
         <div>
           Firstname:{" "}
-          <input
+          <input onChange={formUpdate}
             type="text"
             name="first_name"
             className="first_name"
             placeholder="enter first name"
+            value={formFill.first_name}
           />
         </div>
         <div>
@@ -18,16 +56,18 @@ export const AddStudent = () => {
             name="last_name"
             className="last_name"
             placeholder="enter last name"
+            value={formFill.last_name}
           />
         </div>
         <div>
           {" "}
           Email:
-          <input
+          <input onChange={formUpdate}
             type="email"
             name="email"
             className="email"
             placeholder="enter email"
+            value={formFill.email}
           />
         </div>
   
@@ -35,14 +75,14 @@ export const AddStudent = () => {
           Gender: {/* NOTE: radio boxes only work when they have same `name`. */}
           <div>
             Male
-            <input
+            <input  onChange={formUpdate}
               name="gender"
               className="male"
               type="radio"
               value={"male"}
             />{" "}
             Female{" "}
-            <input
+            <input  onChange={formUpdate}
               name="gender"
               className="female"
               type="radio"
@@ -52,33 +92,36 @@ export const AddStudent = () => {
         </div>
         <div>
           Age{" "}
-          <input
+          <input  onChange={formUpdate}
             type="number"
             name="age"
             className="age"
             placeholder="enter age"
+            value={formFill.age}
           />
         </div>
         <div>
           Tenth Score:{" "}
-          <input
+          <input  onChange={formUpdate}
             type="number"
             name="tenth_score"
             className="tenth_score"
             placeholder="enter 10th score"
+            value={formFill.tenth_score}
           />{" "}
         </div>
         <div>
           Twelth Score:{" "}
-          <input
+          <input  onChange={formUpdate}
             type="number"
             name="twelth_score"
             className="twelth_score"
             placeholder="enter 12th score"
+            value={formFill.twelth_score}
           />{" "}
         </div>
         <div>
-          <select
+          <select  onChange={formUpdate}
             value={""} // select dropdown needs both value and onChange attributes
             name="preferred_branch"
             className="preferred_branch"
@@ -92,9 +135,7 @@ export const AddStudent = () => {
           </select>
         </div>
   
-        <input className="submit" type="submit" value="Submit"  onClick={()=>{
-            
-        }}/>
+        <input className="submit" type="submit" value="Submit"  />
         {
           // <div className="error"></div>
           // show this div with proper error before submitting form, if there's anything not provided
